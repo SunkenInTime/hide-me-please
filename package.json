@@ -1,0 +1,38 @@
+{
+  "name": "hide-me-please",
+  "displayName": "Hide Me Please",
+  "version": "0.0.1",
+  "description": "Replaces configured text on websites without changing the surrounding HTML tags.",
+  "author": "OpenAI",
+  "scripts": {
+    "dev": "plasmo dev",
+    "dev:firefox": "plasmo dev --target=firefox-mv3",
+    "build": "plasmo build --target=chrome-mv3",
+    "build:firefox": "plasmo build --target=firefox-mv3",
+    "package": "plasmo package --target=chrome-mv3",
+    "package:firefox": "plasmo package --target=firefox-mv3"
+  },
+  "dependencies": {
+    "plasmo": "0.90.5",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
+  },
+  "devDependencies": {
+    "@ianvs/prettier-plugin-sort-imports": "4.1.1",
+    "@types/chrome": "0.0.258",
+    "@types/node": "20.11.5",
+    "@types/react": "18.2.48",
+    "@types/react-dom": "18.2.18",
+    "prettier": "3.2.4",
+    "typescript": "5.3.3"
+  },
+  "manifest": {
+    "permissions": [
+      "storage"
+    ],
+    "host_permissions": [
+      "http://*/*",
+      "https://*/*"
+    ]
+  }
+}
