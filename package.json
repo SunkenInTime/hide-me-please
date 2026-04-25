@@ -5,6 +5,7 @@
   "description": "Replaces configured text on websites without changing the surrounding HTML tags.",
   "author": "OpenAI",
   "scripts": {
+    "restore-icon": "python scripts/process_icon.py --strip-margin --input assets/bg.image.png --output assets/icon.png && node -e \"require('fs').copyFileSync('assets/icon.png','assets/icon.development.png')\"",
     "dev": "plasmo dev",
     "dev:firefox": "plasmo dev --target=firefox-mv3",
     "build": "plasmo build --target=chrome-mv3",
