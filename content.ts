@@ -8,13 +8,7 @@ export const config: PlasmoCSConfig = {
 
 const STORAGE_KEY = "textReplacementSettings"
 const REFRESH_MESSAGE = "refresh-replacements"
-const SKIP_TAGS = new Set([
-  "SCRIPT",
-  "STYLE",
-  "NOSCRIPT",
-  "OPTION",
-  "SELECT"
-])
+const SKIP_TAGS = new Set(["SCRIPT", "STYLE", "NOSCRIPT", "OPTION", "SELECT"])
 
 const REPLACEABLE_ATTRIBUTES = [
   "aria-label",
@@ -78,7 +72,8 @@ const normalizeSettings = (
 
   if (
     replacements.length === 0 &&
-    (rawValue.searchText !== undefined || rawValue.replacementText !== undefined)
+    (rawValue.searchText !== undefined ||
+      rawValue.replacementText !== undefined)
   ) {
     replacements.push({
       id: "replacement-0",
@@ -95,7 +90,9 @@ const normalizeSettings = (
 
 const getActiveReplacements = (): ReplacementRule[] =>
   currentSettings.enabled
-    ? currentSettings.replacements.filter((replacement) => replacement.searchText)
+    ? currentSettings.replacements.filter(
+        (replacement) => replacement.searchText
+      )
     : []
 
 const getOriginalTextValue = (node: Text): string => {
@@ -155,13 +152,18 @@ const setOriginalAttributeValue = (
   attributeValues.set(attributeName, value)
 }
 
+const escapeRegExp = (value: string): string =>
+  value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
+
 const replaceAllOccurrences = (sourceText: string): string => {
   let nextValue = sourceText
 
   for (const replacement of getActiveReplacements()) {
-    nextValue = nextValue
-      .split(replacement.searchText)
-      .join(replacement.replacementText)
+    const searchPattern = new RegExp(escapeRegExp(replacement.searchText), "gi")
+    nextValue = nextValue.replace(
+      searchPattern,
+      () => replacement.replacementText
+    )
   }
 
   return nextValue
@@ -238,7 +240,10 @@ const applyReplacementToSubtree = (root: Node): void => {
     applyReplacementToElement(root as Element)
   }
 
-  if (root.nodeType === Node.DOCUMENT_FRAGMENT_NODE && root instanceof ShadowRoot) {
+  if (
+    root.nodeType === Node.DOCUMENT_FRAGMENT_NODE &&
+    root instanceof ShadowRoot
+  ) {
     const shadowChildren = Array.from(root.children)
     for (const child of shadowChildren) {
       applyReplacementToElement(child)
@@ -287,7 +292,10 @@ const handleMutations = (mutations: MutationRecord[]): void => {
   }
 
   for (const mutation of mutations) {
-    if (mutation.type === "characterData" && mutation.target.nodeType === Node.TEXT_NODE) {
+    if (
+      mutation.type === "characterData" &&
+      mutation.target.nodeType === Node.TEXT_NODE
+    ) {
       const textNode = mutation.target as Text
       setOriginalTextValue(textNode, textNode.data)
       applyReplacementToTextNode(textNode)
@@ -376,7 +384,9 @@ chrome.storage.onChanged.addListener((changes, areaName) => {
     return
   }
 
-  const nextValue = changes[STORAGE_KEY]?.newValue as Partial<ReplacementSettings> | undefined
+  const nextValue = changes[STORAGE_KEY]?.newValue as
+    | Partial<ReplacementSettings>
+    | undefined
   currentSettings = normalizeSettings(
     (nextValue as Partial<ReplacementSettings> & {
       searchText?: string

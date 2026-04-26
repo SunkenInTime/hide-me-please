@@ -3,15 +3,17 @@
   "displayName": "Hide Me Please",
   "version": "0.0.1",
   "description": "Replaces configured text on websites without changing the surrounding HTML tags.",
-  "author": "OpenAI",
+  "author": "Dara Adedeji",
   "scripts": {
-    "restore-icon": "python scripts/process_icon.py --strip-margin --input assets/bg.image.png --output assets/icon.png && node -e \"require('fs').copyFileSync('assets/icon.png','assets/icon.development.png')\"",
+    "restore-icon": "python3 scripts/process_icon.py --strip-margin --input assets/bg.image.png --output assets/icon.png && node -e \"require('fs').copyFileSync('assets/icon.png','assets/icon.development.png')\"",
     "dev": "plasmo dev",
     "dev:firefox": "plasmo dev --target=firefox-mv3",
+    "typecheck": "tsc --noEmit",
     "build": "plasmo build --target=chrome-mv3",
     "build:firefox": "plasmo build --target=firefox-mv3",
     "package": "plasmo package --target=chrome-mv3",
-    "package:firefox": "plasmo package --target=firefox-mv3"
+    "package:firefox": "plasmo package --target=firefox-mv3",
+    "release": "pnpm typecheck && pnpm build && pnpm package"
   },
   "dependencies": {
     "plasmo": "0.90.5",
