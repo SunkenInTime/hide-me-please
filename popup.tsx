@@ -1,3 +1,4 @@
+import iconUrl from "data-base64:~assets/icon.png"
 import { useEffect, useState } from "react"
 
 const STORAGE_KEY = "textReplacementSettings"
@@ -47,7 +48,8 @@ const normalizeSettings = (
 
   if (
     replacements.length === 0 &&
-    (rawValue.searchText !== undefined || rawValue.replacementText !== undefined)
+    (rawValue.searchText !== undefined ||
+      rawValue.replacementText !== undefined)
   ) {
     replacements.push(
       createReplacementRule({
@@ -68,9 +70,9 @@ const serializeSettings = (settings: ReplacementSettings): string =>
 
 function IndexPopup() {
   const [settings, setSettings] = useState<ReplacementSettings>(defaultSettings)
-  const [revealedReplacementId, setRevealedReplacementId] = useState<string | null>(
-    null
-  )
+  const [revealedReplacementId, setRevealedReplacementId] = useState<
+    string | null
+  >(null)
   const [savedSettingsSnapshot, setSavedSettingsSnapshot] = useState(
     serializeSettings(defaultSettings)
   )
@@ -165,13 +167,15 @@ function IndexPopup() {
         color: "#0f172a",
         backgroundColor: "#f1f5f9",
         fontSize: 12
-      }}>
+      }}
+    >
       <div
         style={{
           display: "flex",
           flexDirection: "column",
           gap: 8
-        }}>
+        }}
+      >
         <div
           style={{
             display: "flex",
@@ -180,8 +184,31 @@ function IndexPopup() {
             gap: 8,
             paddingBottom: 6,
             borderBottom: "1px solid #cbd5e1"
-          }}>
-          <span style={{ fontSize: 13, fontWeight: 700 }}>Hide Me Please</span>
+          }}
+        >
+          <span
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 6,
+              minWidth: 0,
+              fontSize: 13,
+              fontWeight: 700
+            }}
+          >
+            <img
+              alt=""
+              aria-hidden="true"
+              src={iconUrl}
+              style={{
+                width: 20,
+                height: 20,
+                flex: "0 0 auto",
+                borderRadius: 5
+              }}
+            />
+            <span>Hide Me Please</span>
+          </span>
           <label
             style={{
               display: "flex",
@@ -192,7 +219,8 @@ function IndexPopup() {
               color: "#334155",
               cursor: "pointer",
               whiteSpace: "nowrap"
-            }}>
+            }}
+          >
             <input
               checked={settings.enabled}
               onChange={(event) => {
@@ -212,7 +240,8 @@ function IndexPopup() {
             display: "flex",
             flexDirection: "column",
             gap: 6
-          }}>
+          }}
+        >
           {settings.replacements.map((replacement, index) => {
             const isSearchTextVisible =
               revealedReplacementId === replacement.id ||
@@ -230,14 +259,16 @@ function IndexPopup() {
                   borderRadius: 6,
                   backgroundColor: "#ffffff",
                   boxShadow: "0 1px 2px rgba(15, 23, 42, 0.04)"
-                }}>
+                }}
+              >
                 <div
                   style={{
                     display: "flex",
                     justifyContent: "space-between",
                     alignItems: "center",
                     minHeight: 22
-                  }}>
+                  }}
+                >
                   <span
                     style={{
                       fontSize: 11,
@@ -245,7 +276,8 @@ function IndexPopup() {
                       color: "#64748b",
                       textTransform: "uppercase",
                       letterSpacing: "0.04em"
-                    }}>
+                    }}
+                  >
                     Rule {index + 1}
                   </span>
                   <button
@@ -264,7 +296,8 @@ function IndexPopup() {
                       cursor: "pointer"
                     }}
                     title="Remove"
-                    type="button">
+                    type="button"
+                  >
                     x
                   </button>
                 </div>
@@ -277,7 +310,8 @@ function IndexPopup() {
                     fontSize: 11,
                     fontWeight: 500,
                     color: "#475569"
-                  }}>
+                  }}
+                >
                   <span>Find (hover to reveal)</span>
                   <input
                     onBlur={() => {
@@ -324,7 +358,8 @@ function IndexPopup() {
                     fontSize: 11,
                     fontWeight: 500,
                     color: "#475569"
-                  }}>
+                  }}
+                >
                   <span>Replace with</span>
                   <input
                     onChange={(event) =>
@@ -360,7 +395,8 @@ function IndexPopup() {
               fontWeight: 600,
               cursor: "pointer"
             }}
-            type="button">
+            type="button"
+          >
             + Add rule
           </button>
         </div>
@@ -383,7 +419,8 @@ function IndexPopup() {
               transition: "background-color 120ms ease, border-color 120ms ease"
             }}
             disabled={!hasUnsavedChanges}
-            type="button">
+            type="button"
+          >
             {hasUnsavedChanges ? "Save changes" : "All changes saved"}
           </button>
         </div>
@@ -394,7 +431,8 @@ function IndexPopup() {
             fontSize: 10,
             lineHeight: 1.35,
             color: "#64748b"
-          }}>
+          }}
+        >
           Replaces text on HTTP/HTTPS pages without changing HTML tags.
         </p>
       </div>
