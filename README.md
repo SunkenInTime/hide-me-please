@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  <a href="https://chromewebstore.google.com/search/Hide%20Me%20Please">
+  <a href="https://chromewebstore.google.com/detail/hide-me-please/mpgkameogcloblgnnollcoipphigikkf">
     <img src="https://developer.chrome.com/static/docs/webstore/branding/image/ChromeWebStore_BadgeWBorder_v2_496x150.png" alt="Available in the Chrome Web Store" width="248">
   </a>
 </p>
