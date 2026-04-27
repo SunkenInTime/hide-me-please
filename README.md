@@ -8,6 +8,16 @@
   A browser extension that replaces configured text on HTTP and HTTPS pages while keeping the surrounding HTML tags intact.
 </p>
 
+<p align="center">
+  <a href="https://chromewebstore.google.com/search/Hide%20Me%20Please">
+    <img src="https://developer.chrome.com/static/docs/webstore/branding/image/ChromeWebStore_BadgeWBorder_v2_496x150.png" alt="Available in the Chrome Web Store" width="248">
+  </a>
+</p>
+
+<p align="center">
+  Firefox support coming soon.
+</p>
+
 ## Overview
 
 Hide Me Please is built with Plasmo and runs as a browser extension. Configure text that should be hidden, and the extension swaps matching page content without breaking the page structure.
