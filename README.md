@@ -15,7 +15,7 @@
 </p>
 
 <p align="center">
-  Firefox support coming soon.
+  <a href="https://addons.mozilla.org/addon/hide-me-please/">Available for Firefox on Mozilla Add-ons</a>
 </p>
 
 ## Overview
